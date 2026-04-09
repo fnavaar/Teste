@@ -1,8 +1,26 @@
-import { Users, MessageCircle, DollarSign, TrendingUp, Plus, ArrowRight } from 'lucide-react'
+import {
+  Users,
+  MessageCircle,
+  DollarSign,
+  TrendingUp,
+  Plus,
+  ArrowRight,
+  LogOut,
+} from 'lucide-react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
+import { useAuth } from '@/contexts/AuthContext'
+
+function LogOutButton() {
+  const { logout } = useAuth()
+  return (
+    <Button variant="ghost" size="icon" onClick={logout} title="Sair do sistema">
+      <LogOut className="h-4 w-4 text-muted-foreground" />
+    </Button>
+  )
+}
 
 const kpis = [
   { title: 'Novos Leads', value: '24', change: '+12%', icon: Users, trend: 'up' },
@@ -56,7 +74,7 @@ export default function Index() {
             Aqui está o resumo do seu dia. Você tem 5 tarefas pendentes.
           </p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <Button variant="outline" className="hidden sm:flex">
             Relatórios
           </Button>
@@ -64,6 +82,7 @@ export default function Index() {
             <Plus className="mr-2 h-4 w-4" />
             Adicionar Lead
           </Button>
+          <LogOutButton />
         </div>
       </div>
 

@@ -1,10 +1,20 @@
 import { useState } from 'react'
-import { MoreHorizontal, Plus, Clock, AlertCircle } from 'lucide-react'
+import { MoreHorizontal, Plus, Clock, AlertCircle, LogOut } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { useToast } from '@/hooks/use-toast'
+import { useAuth } from '@/contexts/AuthContext'
+
+function LogOutButton() {
+  const { logout } = useAuth()
+  return (
+    <Button variant="ghost" size="icon" onClick={logout} title="Sair do sistema" className="ml-2">
+      <LogOut className="h-4 w-4 text-muted-foreground" />
+    </Button>
+  )
+}
 
 type Lead = {
   id: string
@@ -160,9 +170,12 @@ export default function Kanban() {
           <h1 className="text-2xl font-bold tracking-tight">Kanban</h1>
           <p className="text-sm text-muted-foreground">Gerencie o pipeline de vendas.</p>
         </div>
-        <Button>
-          <Plus className="mr-2 h-4 w-4" /> Novo Lead
-        </Button>
+        <div className="flex items-center">
+          <Button>
+            <Plus className="mr-2 h-4 w-4" /> Novo Lead
+          </Button>
+          <LogOutButton />
+        </div>
       </div>
 
       <ScrollArea className="flex-1 w-full rounded-md">
